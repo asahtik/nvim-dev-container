@@ -49,11 +49,10 @@ local function get_compose_files_command(compose_file)
   if type(compose_file) == "table" then
     command = {}
     for _, file in ipairs(compose_file) do
-      table.insert(command, "-f")
       table.insert(command, file)
     end
   elseif type(compose_file) == "string" then
-    command = { "-f", compose_file }
+    command = { compose_file }
   end
   return command
 end
