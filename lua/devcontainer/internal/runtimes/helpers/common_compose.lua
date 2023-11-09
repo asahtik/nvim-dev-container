@@ -21,7 +21,8 @@ local function run_current_compose_command(self, args, opts, onexit)
     local parts = vim.split(runtime, " ")
     runtime = parts[1]
     table.remove(parts, 1)
-    vim.list_extend(args, parts)
+    vim.list_extend(parts, args)
+    args = parts
   end
 
   opts = opts or {}
@@ -45,15 +46,15 @@ end
 ---Prepare compose command arguments with file or files
 ---@param compose_file string|table
 local function get_compose_files_command(compose_file)
-  local command = nil
+  local command = { "-f" }
   if type(compose_file) == "table" then
-    command = {}
     for _, file in ipairs(compose_file) do
       table.insert(command, file)
     end
   elseif type(compose_file) == "string" then
-    command = { compose_file }
+    vim.list_extend(command, { compose_file })
   end
+  vim.list_extend(command, { "up" })
   return command
 end
 
@@ -62,7 +63,7 @@ end
 ---@param opts ComposeUpOpts Additional options including callbacks
 function M:up(compose_file, opts)
   local command = get_compose_files_command(compose_file)
-  vim.list_extend(command, { "up", "--detach" })
+  vim.list_extend(command, { "--detach" })
   vim.list_extend(command, opts.args or {})
   run_current_compose_command(self, command, nil, function(code, _)
     if code == 0 then
