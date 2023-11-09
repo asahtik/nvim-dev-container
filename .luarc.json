@@ -3,5 +3,11 @@
     "diagnostics.globals": [
         "describe",
         "it"
+    ],
+    "workspace.library": [
+        "/home/work/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/usr/share/nvim/runtime/lua",
+        "/home/work/workspaces/temp/nvim-dev-container/lua",
+        "${3rd}/luv/library"
     ]
 }

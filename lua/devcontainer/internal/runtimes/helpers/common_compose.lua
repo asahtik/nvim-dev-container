@@ -62,7 +62,7 @@ end
 ---@param opts ComposeUpOpts Additional options including callbacks
 function M:up(compose_file, opts)
   local command = get_compose_files_command(compose_file)
-  vim.list_extend(command, { "up", "-d" })
+  vim.list_extend(command, { "up", "--detach" })
   vim.list_extend(command, opts.args or {})
   run_current_compose_command(self, command, nil, function(code, _)
     if code == 0 then
