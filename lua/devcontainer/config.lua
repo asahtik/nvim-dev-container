@@ -54,10 +54,12 @@ end
 local function default_nvim_installation_commands_provider(_, version_string)
   return {
     {
+      "sudo",
       "apt-get",
       "update",
     },
     {
+      "sudo",
       "apt-get",
       "-y",
       "install",
